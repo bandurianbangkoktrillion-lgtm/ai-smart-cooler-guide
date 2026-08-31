@@ -11,214 +11,123 @@
   <title>บ้านทุเรียนชาววัง | AI Smart Cooler</title>
 
   <style>
-    /* ==============================
-       ตั้งค่าพื้นฐาน
-       ============================== */
-
     * {
+      box-sizing: border-box;
       margin: 0;
       padding: 0;
-      box-sizing: border-box;
     }
 
     html,
     body {
       width: 100%;
-      height: 100%;
-      overflow-x: hidden;
+      min-height: 100%;
       background: #ffffff;
     }
 
     body {
-      font-family: Arial, "Noto Sans Thai", sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      overflow-x: hidden;
     }
 
-
-    /* ==============================
-       กล่องหลัก
-       ============================== */
-
-    .container {
+    .page {
       position: relative;
       width: 100%;
-      max-width: 1000px;
-      margin: 0 auto;
+      max-width: 1536px;
+      line-height: 0;
     }
 
-
-    /* ==============================
-       ภาพหน้าแรก
-       ============================== */
-
+    /* ภาพหน้าแรก */
     .background {
       display: block;
       width: 100%;
       height: auto;
     }
 
+    /*
+      พื้นที่กดแบบโปร่งใส
+      ไม่แสดงข้อความหรือสีใด ๆ
+      เพราะข้อความและปุ่มอยู่ในภาพพื้นหลังแล้ว
+    */
 
-    /* ==============================
-       พื้นที่ปุ่มแบบโปร่งใส
-       ไม่มีสี ไม่มีข้อความ
-       ============================== */
-
-    .menu-button {
+    .button {
       position: absolute;
-      left: 5.5%;
-      width: 89%;
-      height: 12.5%;
-
       display: block;
-
       background: transparent;
       border: none;
-
-      z-index: 10;
-
       cursor: pointer;
-
-      -webkit-tap-highlight-color: transparent;
       text-decoration: none;
+      -webkit-tap-highlight-color: transparent;
     }
-
-
-    /* ==============================
-       ตำแหน่งปุ่มทั้ง 3
-       อ้างอิงจากภาพ home.png
-       ============================== */
 
     /* ปุ่มที่ 1 : ประวัติร้าน */
-    #btn-history {
-      top: 48.0%;
+    .history {
+      left: 5.5%;
+      top: 40.8%;
+      width: 89%;
+      height: 8.3%;
     }
-
 
     /* ปุ่มที่ 2 : ดูวิธีใช้ */
-    #btn-howto {
-      top: 60.5%;
+    .how-to-use {
+      left: 5.5%;
+      top: 49.6%;
+      width: 89%;
+      height: 8.4%;
     }
-
 
     /* ปุ่มที่ 3 : สนใจแฟรนไชส์ */
-    #btn-franchise {
-      top: 73.0%;
+    .franchise {
+      left: 5.5%;
+      top: 58.5%;
+      width: 89%;
+      height: 8.4%;
     }
 
-
-    /* ==============================
-       ปรับตำแหน่งสำหรับมือถือ
-       ============================== */
-
-    @media (max-width: 768px) {
-
-      .menu-button {
-        left: 5%;
-        width: 90%;
-        height: 12.5%;
-      }
-
-      #btn-history {
-        top: 48.0%;
-      }
-
-      #btn-howto {
-        top: 60.5%;
-      }
-
-      #btn-franchise {
-        top: 73.0%;
-      }
+    /* ป้องกันการลากภาพ */
+    img {
+      user-select: none;
+      -webkit-user-drag: none;
     }
-
-
-    /* ==============================
-       ปรับสำหรับมือถือจอแคบมาก
-       ============================== */
-
-    @media (max-width: 480px) {
-
-      .menu-button {
-        left: 5%;
-        width: 90%;
-        height: 12.5%;
-      }
-
-      #btn-history {
-        top: 48.0%;
-      }
-
-      #btn-howto {
-        top: 60.5%;
-      }
-
-      #btn-franchise {
-        top: 73.0%;
-      }
-    }
-
   </style>
 </head>
 
-
 <body>
 
-  <div class="container">
+  <main class="page">
 
-    <!-- =================================
-         ภาพหน้าแรกของ บ้านทุเรียนชาววัง
-         ================================= -->
-
+    <!-- ภาพหน้าแรก -->
     <img
-      src="home.png"
       class="background"
+      src="home-background.png.png"
       alt="บ้านทุเรียนชาววัง AI Smart Cooler"
     >
 
-
-    <!-- =================================
-         ปุ่มโปร่งใสที่ 1
-         ประวัติร้าน
-         ตอนนี้ยังไม่มีลิงก์
-         ================================= -->
-
+    <!-- 1. ประวัติร้าน : ยังไม่ใส่ลิงก์ -->
     <a
-      id="btn-history"
-      class="menu-button"
+      class="button history"
       href="javascript:void(0);"
       aria-label="ประวัติร้าน"
     ></a>
 
-
-    <!-- =================================
-         ปุ่มโปร่งใสที่ 2
-         ดูวิธีใช้
-         เปิด TikTok
-         ================================= -->
-
+    <!-- 2. ดูวิธีใช้ : เปิด TikTok -->
     <a
-      id="btn-howto"
-      class="menu-button"
+      class="button how-to-use"
       href="https://vt.tiktok.com/ZSVcSqv4H/"
       target="_blank"
       rel="noopener noreferrer"
       aria-label="ดูวิธีใช้"
     ></a>
 
-
-    <!-- =================================
-         ปุ่มโปร่งใสที่ 3
-         สนใจแฟรนไชส์
-         ตอนนี้ยังไม่มีลิงก์
-         ================================= -->
-
+    <!-- 3. สนใจแฟรนไชส์ : ยังไม่ใส่ลิงก์ -->
     <a
-      id="btn-franchise"
-      class="menu-button"
+      class="button franchise"
       href="javascript:void(0);"
       aria-label="สนใจแฟรนไชส์"
     ></a>
 
-  </div>
+  </main>
 
 </body>
 </html>
