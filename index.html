@@ -1,133 +1,323 @@
 <!DOCTYPE html>
 <html lang="th">
 <head>
-  <meta charset="UTF-8">
+<meta charset="UTF-8">
 
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
-  >
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-  <title>บ้านทุเรียนชาววัง | AI Smart Cooler</title>
+<title>บ้านทุเรียนชาววัง | AI Smart Cooler</title>
 
-  <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+<style>
 
-    html,
-    body {
-      width: 100%;
-      min-height: 100%;
-      background: #ffffff;
-    }
+/* =========================
+   พื้นฐาน
+========================= */
 
-    body {
-      display: flex;
-      justify-content: center;
-      align-items: flex-start;
-      overflow-x: hidden;
-    }
+* {
+    box-sizing: border-box;
+}
 
-    .page {
-      position: relative;
-      width: 100%;
-      max-width: 1536px;
-      line-height: 0;
-    }
+html,
+body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    min-height: 100%;
+    background: #ffffff;
+}
 
-    /* ภาพหน้าแรก */
-    .background {
-      display: block;
-      width: 100%;
-      height: auto;
-    }
+body {
+    font-family: Arial, "Noto Sans Thai", sans-serif;
+    display: flex;
+    justify-content: center;
+}
+
+/* =========================
+   พื้นที่หลัก
+   อัตราส่วนเดียวกับภาพ Background
+========================= */
+
+.page {
+    position: relative;
+    width: 100%;
+    max-width: 768px;
+    line-height: 0;
+}
+
+/* =========================
+   ภาพ Background
+========================= */
+
+.background {
+    display: block;
+    width: 100%;
+    height: auto;
+    margin: 0;
+    padding: 0;
+}
+
+/* =========================
+   ชั้นปุ่มลอย
+========================= */
+
+.button-layer {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+/* =========================
+   แผ่นใสสำหรับกด
+========================= */
+
+.hotspot {
+    position: absolute;
 
     /*
-      พื้นที่กดแบบโปร่งใส
-      ไม่แสดงข้อความหรือสีใด ๆ
-      เพราะข้อความและปุ่มอยู่ในภาพพื้นหลังแล้ว
+      สำคัญ:
+      ขนาดและตำแหน่งเป็น %
+      จึงจะย่อ/ขยายตาม Background
     */
 
-    .button {
-      position: absolute;
-      display: block;
-      background: transparent;
-      border: none;
-      cursor: pointer;
-      text-decoration: none;
-      -webkit-tap-highlight-color: transparent;
+    left: 5.5%;
+    width: 89%;
+
+    pointer-events: auto;
+    cursor: pointer;
+
+    border-radius: 6vw;
+
+    /*
+      แผ่นใส
+    */
+    background: rgba(255, 255, 255, 0.045);
+
+    /*
+      ขอบทองบาง ๆ
+    */
+    border: 2px solid rgba(255, 220, 100, 0.60);
+
+    /*
+      เงาให้ดูเหมือนปุ่มลอย
+    */
+    box-shadow:
+        0 5px 12px rgba(0, 0, 0, 0.25),
+        inset 0 0 12px rgba(255, 255, 255, 0.10);
+
+    /*
+      ทำให้แผ่นใสดูมีมิติ
+    */
+    transition:
+        transform 0.18s ease,
+        box-shadow 0.18s ease,
+        background 0.18s ease;
+
+    overflow: hidden;
+}
+
+/* =========================
+   แสงวิ่งบนปุ่ม
+========================= */
+
+.hotspot::after {
+    content: "";
+    position: absolute;
+
+    top: 0;
+    left: -120%;
+
+    width: 55%;
+    height: 100%;
+
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255,255,255,0.28),
+        transparent
+    );
+
+    transform: skewX(-20deg);
+
+    animation: shine 4.5s infinite;
+}
+
+@keyframes shine {
+
+    0% {
+        left: -120%;
     }
 
-    /* ปุ่มที่ 1 : ประวัติร้าน */
-    .history {
-      left: 5.5%;
-      top: 40.8%;
-      width: 89%;
-      height: 8.3%;
+    35% {
+        left: 140%;
     }
 
-    /* ปุ่มที่ 2 : ดูวิธีใช้ */
-    .how-to-use {
-      left: 5.5%;
-      top: 49.6%;
-      width: 89%;
-      height: 8.4%;
+    100% {
+        left: 140%;
+    }
+}
+
+/* =========================
+   ตอนเอานิ้วแตะ
+========================= */
+
+.hotspot:active {
+    transform: scale(0.985);
+
+    background: rgba(255, 255, 255, 0.16);
+
+    box-shadow:
+        0 2px 7px rgba(0,0,0,0.25),
+        inset 0 0 18px rgba(255,255,255,0.25);
+}
+
+/* =========================
+   ปุ่มที่ 1
+   ประวัติร้าน
+========================= */
+
+.history {
+    top: 41.0%;
+    height: 8.7%;
+}
+
+/* =========================
+   ปุ่มที่ 2
+   ดูวิธีใช้
+========================= */
+
+.howto {
+    top: 50.0%;
+    height: 8.7%;
+}
+
+/* =========================
+   ปุ่มที่ 3
+   สนใจแฟรนไชส์
+========================= */
+
+.franchise {
+    top: 59.0%;
+    height: 8.7%;
+}
+
+/* =========================
+   รองรับมือถือจอแคบ
+========================= */
+
+@media (max-width: 480px) {
+
+    .hotspot {
+        border-width: 1.5px;
     }
 
-    /* ปุ่มที่ 3 : สนใจแฟรนไชส์ */
-    .franchise {
-      left: 5.5%;
-      top: 58.5%;
-      width: 89%;
-      height: 8.4%;
+}
+
+/* =========================
+   รองรับคอมพิวเตอร์
+========================= */
+
+@media (min-width: 769px) {
+
+    .page {
+        max-width: 768px;
     }
 
-    /* ป้องกันการลากภาพ */
-    img {
-      user-select: none;
-      -webkit-user-drag: none;
+    .hotspot {
+        border-radius: 46px;
     }
-  </style>
+
+}
+
+</style>
 </head>
 
 <body>
 
-  <main class="page">
+<div class="page">
 
-    <!-- ภาพหน้าแรก -->
+    <!-- ภาพ Background หลัก -->
     <img
-      class="background"
-      src="home-background.png.png"
-      alt="บ้านทุเรียนชาววัง AI Smart Cooler"
+        src="home-background.png.png"
+        class="background"
+        alt="บ้านทุเรียนชาววัง AI Smart Cooler"
     >
 
-    <!-- 1. ประวัติร้าน : ยังไม่ใส่ลิงก์ -->
-    <a
-      class="button history"
-      href="javascript:void(0);"
-      aria-label="ประวัติร้าน"
-    ></a>
+    <!-- ชั้นปุ่มลอย -->
+    <div class="button-layer">
 
-    <!-- 2. ดูวิธีใช้ : เปิด TikTok -->
-    <a
-      class="button how-to-use"
-      href="https://vt.tiktok.com/ZSVcSqv4H/"
-      target="_blank"
-      rel="noopener noreferrer"
-      aria-label="ดูวิธีใช้"
-    ></a>
+        <!-- 1. ประวัติร้าน -->
+        <div
+            class="hotspot history"
+            onclick="historyButton()"
+            aria-label="ประวัติร้าน">
+        </div>
 
-    <!-- 3. สนใจแฟรนไชส์ : ยังไม่ใส่ลิงก์ -->
-    <a
-      class="button franchise"
-      href="javascript:void(0);"
-      aria-label="สนใจแฟรนไชส์"
-    ></a>
+        <!-- 2. ดูวิธีใช้ -->
+        <div
+            class="hotspot howto"
+            onclick="howToButton()"
+            aria-label="ดูวิธีใช้">
+        </div>
 
-  </main>
+        <!-- 3. สนใจแฟรนไชส์ -->
+        <div
+            class="hotspot franchise"
+            onclick="franchiseButton()"
+            aria-label="สนใจแฟรนไชส์">
+        </div>
+
+    </div>
+
+</div>
+
+
+<script>
+
+/* ===================================
+   ปุ่ม 1 : ประวัติร้าน
+   ยังไม่ใส่ลิงก์
+=================================== */
+
+function historyButton() {
+
+    // ยังไม่กำหนดลิงก์
+    console.log("กดปุ่ม ประวัติร้าน");
+
+}
+
+
+/* ===================================
+   ปุ่ม 2 : ดูวิธีใช้
+   TikTok
+=================================== */
+
+function howToButton() {
+
+    window.open(
+        "https://vt.tiktok.com/ZSVcSqv4H/",
+        "_blank"
+    );
+
+}
+
+
+/* ===================================
+   ปุ่ม 3 : สนใจแฟรนไชส์
+   ยังไม่ใส่ลิงก์
+=================================== */
+
+function franchiseButton() {
+
+    // ยังไม่กำหนดลิงก์
+    console.log("กดปุ่ม สนใจแฟรนไชส์");
+
+}
+
+</script>
 
 </body>
 </html>
